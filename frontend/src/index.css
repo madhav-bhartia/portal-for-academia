@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Sora', system-ui, sans-serif;
+  --font-body:    'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+
+  /* ── Canvas / Background ───────────────────────── */
+  --color-canvas:        #F8FAFC;
+  --color-canvas-alt:    #F1F5F9;
+  --color-surface:       #FFFFFF;
+  --color-surface-raised:#FFFFFF;
+  --color-surface-high:  #FFFFFF;
+
+  /* ── Primary accent – Professional Blue ──────────────── */
+  --color-primary:        #2563EB;
+  --color-primary-bright: #3B82F6;
+  --color-primary-dim:    #1D4ED8;
+  --color-primary-wash:   rgba(37, 99, 235, 0.08);
+  --color-primary-wash2:  rgba(37, 99, 235, 0.15);
+
+  /* ── Teal (kept for compatibility) ────────────── */
+  --color-teal:          #0F766E;
+  --color-teal-bright:   #14B8A6;
+  --color-teal-dim:      #0F766E;
+  --color-teal-wash:     rgba(20, 184, 166, 0.1);
+  --color-teal-muted:    rgba(20, 184, 166, 0.3);
+
+  /* ── Border ────────────────────────────────────── */
+  --color-border:        #E2E8F0;
+  --color-border-bright: #CBD5E1;
+
+  /* ── Text ──────────────────────────────────────── */
+  --color-text:          #0F172A;
+  --color-text-muted:    #475569;
+  --color-text-dim:      #64748B;
+
+  /* ── Status / data colors ──────────────────────── */
+  --color-amber:         #D97706;
+  --color-rose:          #E11D48;
+  --color-violet:        #4F46E5;
+  --color-violet-wash:   rgba(79, 70, 229, 0.1);
+  --color-sky:           #0284C7;
+  --color-sky-wash:      rgba(2, 132, 199, 0.08);
+  --color-emerald:       #059669;
+  --color-emerald-wash:  rgba(5, 150, 105, 0.1);
+
+  /* ── Flat UI / Less Glassmorphism ─────────────────────────────── */
+  --glass-bg:            rgba(255, 255, 255, 0.95);
+  --glass-border:        #E2E8F0;
+  --glass-shadow:        0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* ── Base ──────────────────────────────────────── */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--color-canvas);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  overflow: hidden;
+}
+
+/* ── Scrollbars ──────────────────────────────────── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+*::-webkit-scrollbar        { width: 4px; height: 4px; }
+*::-webkit-scrollbar-track  { background: transparent; }
+*::-webkit-scrollbar-thumb  { background: var(--color-border-bright); border-radius: 2px; }
+
+/* ── Animations ──────────────────────────────────── */
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes tab-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-5px) rotate(3deg); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%       { opacity: 0.9; transform: scale(1.1); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes progress-fill {
+  from { width: 0; }
+}
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+@keyframes radar-sweep {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.animate-page-in    { animation: page-in  350ms cubic-bezier(0.22,1,0.36,1) both; }
+.animate-tab-in     { animation: tab-in   280ms cubic-bezier(0.22,1,0.36,1) both; }
+.animate-fade-in    { animation: fade-in  220ms ease-out both; }
+.animate-scale-in   { animation: scale-in 300ms cubic-bezier(0.22,1,0.36,1) both; }
+.animate-slide-up   { animation: slide-up 400ms cubic-bezier(0.22,1,0.36,1) both; }
+.animate-float      { animation: float    4s ease-in-out infinite; }
+.animate-float2     { animation: float2   5s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
+.animate-spin-slow  { animation: spin-slow 12s linear infinite; }
+
+/* ── Typography helpers ──────────────────────────── */
+.font-display { font-family: var(--font-display); }
+.font-mono    { font-family: var(--font-mono); }
+
+/* ── Gradient text ────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-teal {
+  background: linear-gradient(135deg, var(--color-teal), var(--color-sky));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-amber {
+  background: linear-gradient(135deg, #F59E0B, #EF4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Gradient backgrounds ────────────────────────── */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-violet));
+}
+.bg-gradient-teal {
+  background: linear-gradient(135deg, var(--color-teal), var(--color-sky));
+}
+.bg-gradient-canvas {
+  background: linear-gradient(135deg, #F5F7FF 0%, #EEF1FB 50%, #F0EEFF 100%);
+}
+
+/* ── Glassmorphism card ──────────────────────────── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+/* ── Bar gradient utils ──────────────────────────── */
+.bar-primary {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-bright));
+}
+.bar-teal {
+  background: linear-gradient(90deg, var(--color-teal), var(--color-teal-bright));
+}
+
+/* ── Dot pattern bg ──────────────────────────────── */
+.dot-pattern {
+  background-image: radial-gradient(circle, rgba(99,102,241,0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ── Card hover lift ─────────────────────────────── */
+.card-lift {
+  transition: transform 250ms cubic-bezier(0.22,1,0.36,1), box-shadow 250ms cubic-bezier(0.22,1,0.36,1);
+}
+.card-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(99,102,241,0.12);
+}

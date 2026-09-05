@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Academician Dashboard{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <h2>Academician Portal</h2>
+    <p class="text-muted">Explore Faculty Development Programs (FDPs), Industrial Training, and Collaborative Research Projects.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white">
+                <h4 class="mb-0">Available Opportunities</h4>
+            </div>
+            <div class="card-body">
+                {% if opportunities %}
+                    <div class="list-group list-group-flush">
+                        {% for opp in opportunities %}
+                        <div class="list-group-item px-0 py-3">
+                            <h5 class="mb-1">{{ opp.title }} <span class="badge bg-secondary rounded-pill ms-2">{{ opp.type }}</span></h5>
+                            <p class="mb-1 text-muted">{{ opp.description }}</p>
+                            <button class="btn btn-sm btn-outline-primary mt-2">Express Interest</button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="alert alert-light text-center" role="alert">
+                        No opportunities posted yet.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

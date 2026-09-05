@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Take Assessment: {{ assessment.title }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm border-0 mt-4">
+            <div class="card-header bg-primary text-white p-3">
+                <h4 class="mb-0">{{ assessment.title }}</h4>
+            </div>
+            <div class="card-body p-4">
+                <p class="mb-4 text-muted">{{ assessment.description }}</p>
+                
+                <form action="/assessments/{{ assessment.id }}/submit" method="post">
+                    <!-- Mock questions for demo purposes -->
+                    <div class="mb-4">
+                        <h5>1. Which of the following is most relevant to this core skill?</h5>
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="radio" name="q1" value="a" required>
+                            <label class="form-check-label">Concept A</label>
+                        </div>
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="radio" name="q1" value="b">
+                            <label class="form-check-label">Concept B</label>
+                        </div>
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="radio" name="q1" value="c">
+                            <label class="form-check-label">Concept C</label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>2. Describe how you would apply this concept in an industry project.</h5>
+                        <textarea class="form-control mt-2" name="q2" rows="3" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success w-100">Submit Assessment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

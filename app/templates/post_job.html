@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Post a Job - Academia-Industry Portal{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-8">
+        <h2 class="mb-4">Post a New Job Opportunity</h2>
+        
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+                <form action="/jobs/post" method="post">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Job Title</label>
+                        <input type="text" name="title" class="form-control" required placeholder="e.g. Junior Data Scientist">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Job Description</label>
+                        <textarea name="description" class="form-control" rows="4" placeholder="Describe the responsibilities and perks..."></textarea>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Required Skills (Comma-separated)</label>
+                        <input type="text" name="required_skills" class="form-control" placeholder="e.g. python, pandas, machine_learning">
+                        <div class="form-text">These skills will be used by our recommendation engine to find the best student matches.</div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100">Publish Job</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

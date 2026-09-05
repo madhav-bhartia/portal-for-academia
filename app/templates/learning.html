@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Industry Learning Programs{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2>Learning & Certification Programs</h2>
+        <p class="text-muted mb-0">Upskill with industry-relevant training to bridge skill gaps.</p>
+    </div>
+    {% if user and user.role == 'industry' %}
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProgramModal">Post a Program</button>
+    {% endif %}
+</div>
+
+<div class="row">
+    {% for p in programs %}
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm h-100 border-0">
+            <div class="card-body">
+                <h5 class="card-title">{{ p.title }}</h5>
+                <p class="card-text text-muted">{{ p.description }}</p>
+                <div class="mb-3">
+                    <strong>Skills Covered:</strong> <span class="badge bg-info text-dark">{{ p.skills_covered }}</span>
+                </div>
+                {% if p.link %}
+                <a href="{{ p.link }}" target="_blank" class="btn btn-outline-success">Enroll / View Course</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12">
+        <div class="alert alert-light text-center">No learning programs have been published yet.</div>
+    </div>
+    {% endfor %}
+</div>
+
+{% if user and user.role == 'industry' %}
+<!-- Modal for posting a program -->
+<div class="modal fade" id="addProgramModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="/learning/post" method="post">
+        <div class="modal-header">
+          <h5 class="modal-title">Publish Learning Program</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" name="title" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea name="description" class="form-control" rows="3"></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Skills Covered (comma-separated)</label>
+            <input type="text" name="skills_covered" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Link</label>
+            <input type="url" name="link" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Publish Program</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

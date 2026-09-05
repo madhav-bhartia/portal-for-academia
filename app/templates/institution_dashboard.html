@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Institution Dashboard{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <h2>Institution Analytics Portal</h2>
+    <p class="text-muted">Monitor student placement readiness, skill trends, and recruitment outcomes.</p>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0 bg-primary text-white text-center p-4 h-100">
+            <h3>{{ total_students }}</h3>
+            <p class="mb-0">Registered Students</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0 bg-success text-white text-center p-4 h-100">
+            <h3>{{ total_applications }}</h3>
+            <p class="mb-0">Total Applications Submitted</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Placement Readiness Overview</h5>
+            </div>
+            <div class="card-body text-center p-5 text-muted">
+                <!-- Placeholder for a Chart.js graph -->
+                <p>Data visualization charts (e.g., Skill Demand vs Student Skills) will render here.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

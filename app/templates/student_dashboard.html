@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Student dashboard{% endblock %}
+{% block content %}
+<h2>Welcome, {{ user.name }}</h2>
+<p class="text-muted">Your skills: {{ user.skills or "none listed yet" }}</p>
+
+<div class="mb-4">
+    <a href="/portfolio/" class="btn btn-outline-primary">View My Digital Portfolio</a>
+</div>
+
+<h4 class="mt-4">Matched internships</h4>
+{% if not ranked %}
+  <p class="text-muted">No internships posted yet.</p>
+{% endif %}
+<div class="list-group">
+  {% for row in ranked %}
+    <div class="list-group-item">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h5 class="mb-1">{{ row.internship.title }}</h5>
+          <p class="mb-1">{{ row.internship.description }}</p>
+          <small class="text-muted">Requires: {{ row.internship.required_skills }}</small>
+        </div>
+        <div class="text-end">
+          <span class="badge bg-primary mb-2">{{ (row.score * 100) | round | int }}% match</span><br>
+          {% if row.internship.id in applied_ids %}
+            <span class="badge bg-secondary">Applied</span>
+          {% else %}
+            <form method="post" action="/student/apply/{{ row.internship.id }}">
+              <button class="btn btn-sm btn-success" type="submit">Apply</button>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

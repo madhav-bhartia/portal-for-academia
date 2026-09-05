@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Post an internship{% endblock %}
+{% block content %}
+<h2>Post an internship</h2>
+<form method="post" action="/industry/post">
+  <div class="mb-3">
+    <label class="form-label">Title</label>
+    <input class="form-control" name="title" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    <textarea class="form-control" name="description" rows="3"></textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Required skills (comma-separated)</label>
+    <input class="form-control" name="required_skills" placeholder="python, sql, react">
+  </div>
+  <button class="btn btn-primary" type="submit">Post</button>
+</form>
+{% endblock %}

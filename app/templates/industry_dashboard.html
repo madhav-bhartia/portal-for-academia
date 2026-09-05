@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Industry dashboard{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center">
+  <h2>{{ user.company_name or user.name }}</h2>
+  <a class="btn btn-primary" href="/industry/post">Post an internship</a>
+</div>
+
+{% for row in listing_data %}
+  <div class="card my-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ row.listing.title }}</h5>
+      <p class="card-text">{{ row.listing.description }}</p>
+      <p class="text-muted">Requires: {{ row.listing.required_skills }}</p>
+      <h6>Applicants ({{ row.applicants | length }})</h6>
+      {% if not row.applicants %}
+        <p class="text-muted">No applicants yet.</p>
+      {% endif %}
+      <ul class="list-group">
+        {% for application, student in row.applicants %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>{{ student.name }} - {{ student.skills }} - <em>{{ application.status.value }}</em></span>
+            <form method="post" action="/industry/applications/{{ application.id }}/status" class="d-flex gap-2">
+              <select name="status" class="form-select form-select-sm">
+                <option value="applied">applied</option>
+                <option value="shortlisted">shortlisted</option>
+                <option value="rejected">rejected</option>
+              </select>
+              <button class="btn btn-sm btn-outline-primary" type="submit">Update</button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}
